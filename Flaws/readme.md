@@ -56,9 +56,7 @@ Browse
     
 to get into the next level
 
-Link for the next level:
-
-    http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud
+Link for the next level: http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud
     
 ## Level 2
 
@@ -81,9 +79,7 @@ Output be like:
     2017-02-27 07:32:14         26 robots.txt
     2017-02-27 07:32:15       1051 secret-e4443fc.html
     
-After getting the result browse the secret file and you will get the link for the next level.
-
-    http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/secret-e4443fc.html
+After getting the result browse the secret file and you will get the link for the next level: http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/secret-e4443fc.html
     
 ## Level 3
 
