@@ -62,3 +62,28 @@ Link for the next level:
     
 ## Level 2
 
+Create an account in aws as with free tier.
+
+Create a Iam user with access key and secret access key after creating the account.
+
+After creating the user try enquiring or list the root directory as a verified user from the terminal after setting the aws cli with access key and secret access key.
+
+command for listing:
+
+    $aws s3 ls s3://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud
+   
+Output be like:
+
+    2017-02-27 07:32:15      80751 everyone.png
+    2017-03-03 09:17:17       1433 hint1.html
+    2017-02-27 07:34:39       1035 hint2.html
+    2017-02-27 07:32:14       2786 index.html
+    2017-02-27 07:32:14         26 robots.txt
+    2017-02-27 07:32:15       1051 secret-e4443fc.html
+    
+After getting the result browse the secret file and you will get the link for the next level.
+
+    http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/secret-e4443fc.html
+    
+## Level 3
+
