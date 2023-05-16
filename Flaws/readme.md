@@ -228,10 +228,46 @@ Use the command to login:
  
      $ssh -i YOUR_KEY.pem  username@host
 
+After login try the command:
+
+      $df -h
+This will returns the prompt:
+
+     Filesystem      Size  Used Avail Use% Mounted on
+     devtmpfs        4.0M     0  4.0M   0% /dev
+     tmpfs           475M     0  475M   0% /dev/shm
+     tmpfs           190M  2.8M  188M   2% /run
+     /dev/xvda1      8.0G  1.5G  6.5G  19% /
+     tmpfs           475M     0  475M   0% /tmp
+     tmpfs            95M     0   95M   0% /run/user/1000
+
+We need to mount the volume /dev/xvda1 as /dev/xvdb1 on /mnt
+
+For that we use the command:
+
+     $sudo mount /dev/xvdb1 /mnt
+
+After mounting, navigate to /mnt/home/ubuntu/
+The list of that dir contains:
+    
+     meta-data  setupNginx.sh
+Use $cat command to view the files
+
+We will get:
+
+     htpasswd -b /etc/nginx/.htpasswd flaws nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M
+     
+From the file setupNginx.sh
+
+uname: flaws    pass: nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M
+
+Use the credentials to logon to http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
 
 
-
-uname: flaws
-pass: nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M
 
 Link for level 5: http://level5-d2891f604d2061b6977c2481b0c8333e.flaws.cloud/243f422c/
+
+
+
+
+## level 5
